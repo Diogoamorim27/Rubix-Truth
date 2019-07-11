@@ -4,7 +4,7 @@ onready var tilemap : TileMap = $TileMap
 onready var player : KinematicBody2D = $Player
 onready var entrance_area : Area2D = $TileMap/Entrance/Area2D
 onready var entrance_text : Label = $TileMap/Entrance/Area2D/Label
-
+onready var portals : = $TileMap/Portals
 
 export var room_on_the_left = ""
 export var room_on_the_right = ""
@@ -54,6 +54,12 @@ func _process(delta):
 	movement.x = temp_movement.x
 
 	## PORTAL LOGIC ##
+	if portals.entered_portal == true:
+		player.global_position = portals.new_position
+		movement = movement.rotated(portals.movement_rotation)
+		portals.entered_portal = false
+
+
 
 	movement = player.move_and_slide(movement, Vector2.UP)
 
@@ -70,11 +76,6 @@ func _process(delta):
 	
 #	room_rotation = Vector2(cos(room_target),sin(room_target)) + Vector2(-1,1)
 	
-	## TEXT DISPLAY ##
-	if entrance_area.overlaps_body(player):
-		entrance_text.visible = true
-	else:
-		entrance_text.visible = false
 	
 	gate_direction = Vector2(round(cos(deg2rad(room_target))),round(sin(deg2rad(room_target))))
 #	print(gate_direction)
