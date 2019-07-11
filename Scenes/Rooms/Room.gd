@@ -23,9 +23,13 @@ var movement : = Vector2()
 var room_target = 0
 var gate_direction = Vector2()
 var room_rotation
+var has_portals : bool 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for child in tilemap.get_children():
+		if child.name == "Portals":
+			has_portals = true
 	movement = PlayerVariables.movement
 	pass # Replace with function body.
 
@@ -54,10 +58,11 @@ func _process(delta):
 	movement.x = temp_movement.x
 
 	## PORTAL LOGIC ##
-	if portals.entered_portal == true:
-		player.global_position = portals.new_position
-		movement = movement.rotated(portals.movement_rotation)
-		portals.entered_portal = false
+	if has_portals:
+		if portals.entered_portal == true:
+			player.global_position = portals.new_position
+			movement = movement.rotated(portals.movement_rotation)
+			portals.entered_portal = false
 
 
 
