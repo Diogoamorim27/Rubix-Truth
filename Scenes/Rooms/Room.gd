@@ -24,6 +24,7 @@ func _ready():
 	for child in tilemap.get_children():
 		if child.name == "Portals":
 			has_portals = true
+	player.global_position = PlayerVariables.new_player_position
 	movement = PlayerVariables.movement
 	pass # Replace with function body.
 
@@ -110,6 +111,7 @@ func _on_Gate_body_entered(body):
 					print("Scene ", room_below ," doesnt exist")
 			Vector2.RIGHT:
 				if ResourceLoader.exists(room_on_the_right):
+					PlayerVariables.new_player_position = Vector2(player.global_position.x - 240, player.global_position.y)
 					get_tree().change_scene(room_on_the_right)
 				else:
 					print("Scene ", room_on_the_right ," doesnt exist")

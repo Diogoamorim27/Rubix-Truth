@@ -11,7 +11,7 @@ const DEACCEL = 10
 const JUMP = -100
 const ROOM_ACCEL = 3
 
-var new_player_position : Vector2
+var new_player_position : Vector2 = Vector2(128,128)
 var movement : Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready():
