@@ -6,17 +6,11 @@ onready var entrance_area : Area2D = $TileMap/Entrance/Area2D
 onready var entrance_text : Label = $TileMap/Entrance/Area2D/Label
 onready var portals : = $TileMap/Portals
 
-export var room_on_the_left = ""
-export var room_on_the_right = ""
-export var room_above = ""
-export var room_below = ""
-export var MOVE_SPEED = 50
-export var GRAVITY = 9.8 * 20
-export var ACCEL = 20
-export var DEACCEL = 10
-export var JUMP = -100
-export var ROOM_ACCEL = 3
-export var gate_to = PI/2
+## ADJACENT ROOMS ##
+export var room_on_the_left = "scene_uninitialized"
+export var room_on_the_right = "scene_uninitialized"
+export var room_above = "scene_uninitialized"
+export var room_below = "scene_uninitialized"
 
 var balance = 0
 var movement : = Vector2()
@@ -40,19 +34,19 @@ func _process(delta):
 	var input = _directional_input()
 
 	if player.is_on_floor() and Input.is_action_just_pressed("ui_accept"):
-		movement.y = JUMP
+		movement.y = PlayerVariables.JUMP
 	else:
-		movement.y += GRAVITY * delta
+		movement.y += PlayerVariables.GRAVITY * delta
 
 	var temp_movement = movement
 	temp_movement.y = 0
-	var target = input * MOVE_SPEED
+	var target = input * PlayerVariables.MOVE_SPEED
 	var acceleration
 
 	if input * temp_movement.x > 0:
-		acceleration = ACCEL
+		acceleration = PlayerVariables.ACCEL
 	else:
-		acceleration = DEACCEL
+		acceleration = PlayerVariables.DEACCEL
 
 	temp_movement = lerp(temp_movement, Vector2(target, 0), acceleration*delta)
 	movement.x = temp_movement.x
@@ -76,15 +70,12 @@ func _process(delta):
 	elif Input.is_action_just_pressed("e"): # and is_current_room and rotation_active:
 		room_target += 90
 
-	tilemap.rotation_degrees = lerp(tilemap.rotation_degrees, room_target, ROOM_ACCEL*delta)
+	tilemap.rotation_degrees = lerp(tilemap.rotation_degrees, room_target, PlayerVariables.ROOM_ACCEL*delta)
 	
-	
-#	room_rotation = Vector2(cos(room_target),sin(room_target)) + Vector2(-1,1)
-	
+	## NEXT ROOM DECIDER ##
 	
 	gate_direction = Vector2(round(cos(deg2rad(room_target))),round(sin(deg2rad(room_target))))
-#	print(gate_direction)
-#	print(gate_direction)
+
 
 func _directional_input() -> int:
 	if !(Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left")):
@@ -111,20 +102,27 @@ func _directional_input() -> int:
 func _on_Gate_body_entered(body):
 	if body.name == "Player":
 		PlayerVariables.movement = movement
-		print (gate_direction)
-		print(Vector2.DOWN)
 		match gate_direction:
 			Vector2.DOWN:
-				print("down")
-				print(PlayerVariables.new_player_position)
-				get_tree().change_scene(room_below)
+				if ResourceLoader.exists(room_below):
+					get_tree().change_scene(room_below)
+				else:
+					print("Scene ", room_below ," doesnt exist")
 			Vector2.RIGHT:
-				print("right")
-				get_tree().change_scene(room_on_the_right)
+				if ResourceLoader.exists(room_on_the_right):
+					get_tree().change_scene(room_on_the_right)
+				else:
+					print("Scene ", room_on_the_right ," doesnt exist")
 			Vector2.UP:
-				print("oa")
+				if ResourceLoader.exists(room_above):
+					get_tree().change_scene(room_above)
+				else:
+					print("Scene ", room_above ," doesnt exist")
 			Vector2.LEFT:
-				print("oi")
+				if ResourceLoader.exists(room_on_the_left):
+					get_tree().change_scene(room_on_the_left)
+				else:
+					print("Scene ", room_on_the_left ," doesnt exist")
 			_:
-				print("nada")
+				print("Gate direction invalid")
 

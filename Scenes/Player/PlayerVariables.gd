@@ -3,6 +3,14 @@ extends Node
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
+const MOVE_SPEED = 50
+const GRAVITY = 9.8 * 20
+const ACCEL = 20
+const DEACCEL = 10
+const JUMP = -100
+const ROOM_ACCEL = 3
+
 var new_player_position : Vector2
 var movement : Vector2
 # Called when the node enters the scene tree for the first time.

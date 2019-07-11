@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scenes/Rooms/RoomNoPortal.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Rooms/Room.gd" type="Script" id=1]
 [ext_resource path="res://Assets/white.png" type="Texture" id=2]
 [ext_resource path="res://Assets/hazard.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Prefabs/Gate.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entrance.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Prefabs/Entrance.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -53,9 +53,6 @@ b = Vector2( 0, 24 )
 
 [node name="Scene" type="Node2D"]
 script = ExtResource( 1 )
-room_on_the_right = "res://Scenes/Rooms/Scene.tscn"
-room_below = "res://Scenes/Rooms/World_Room1.tscn"
-MOVE_SPEED = 100
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 128, 128 )
