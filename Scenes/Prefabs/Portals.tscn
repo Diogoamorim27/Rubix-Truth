@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( -24, 8 )
+b = Vector2( 24, 8 )
+
+[sub_resource type="SegmentShape2D" id=2]
+a = Vector2( -24, 8 )
+b = Vector2( 24, 8 )
+
+[node name="Portals" type="Node2D"]
+
+[node name="Portal1" type="Area2D" parent="."]
+position = Vector2( -40, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal1"]
+shape = SubResource( 1 )
+
+[node name="Portal2" type="Area2D" parent="."]
+position = Vector2( 40, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal2"]
+shape = SubResource( 2 )
