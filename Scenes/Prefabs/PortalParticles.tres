@@ -19,6 +19,7 @@ emission_box_extents = Vector3( 24, 0, 1 )
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -9, 0 )
+angular_velocity = 1.05
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 3.0

@@ -87,8 +87,32 @@ func _process(delta):
 	tilemap.rotation_degrees = lerp(tilemap.rotation_degrees, room_target, PlayerVariables.ROOM_ACCEL*delta)
 	
 	## NEXT ROOM DECIDER ##
-	
 	gate_direction = Vector2(round(cos(deg2rad(room_target))),round(sin(deg2rad(room_target))))
+
+	match gate_direction:
+			Vector2.DOWN:
+				if ResourceLoader.exists(room_on_the_right):
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = true
+				else: 
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = false
+			Vector2.RIGHT:
+				if ResourceLoader.exists(room_on_the_right):
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = true
+				else: 
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = false
+			Vector2.UP:
+				if ResourceLoader.exists(room_on_the_right):
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = true
+				else: 
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = false
+			Vector2.LEFT:
+				if ResourceLoader.exists(room_on_the_right):
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = true
+				else: 
+					$TileMap/Gate/StaticBody2D/CollisionShape2D.disabled = false
+
+
+
 
 
 func _directional_input() -> int:
@@ -120,24 +144,24 @@ func _on_Gate_body_entered(body):
 			Vector2.DOWN:
 				if ResourceLoader.exists(room_below):
 					get_tree().change_scene(room_below)
-					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y + 240)
+					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y + 256)
 				else:
 					print("Scene ", room_below ," doesnt exist")
 			Vector2.RIGHT:
 				if ResourceLoader.exists(room_on_the_right):
-					PlayerVariables.new_player_position = Vector2(player.global_position.x - 240, player.global_position.y)
+					PlayerVariables.new_player_position = Vector2(player.global_position.x - 256, player.global_position.y)
 					get_tree().change_scene(room_on_the_right)
 				else:
 					print("Scene ", room_on_the_right ," doesnt exist")
 			Vector2.UP:
 				if ResourceLoader.exists(room_above):
-					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y - 240)
+					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y - 256)
 					get_tree().change_scene(room_above)
 				else:
 					print("Scene ", room_above ," doesnt exist")
 			Vector2.LEFT:
 				if ResourceLoader.exists(room_on_the_left):
-					PlayerVariables.new_player_position = Vector2(player.global_position.x + 240, player.global_position.y)
+					PlayerVariables.new_player_position = Vector2(player.global_position.x + 256, player.global_position.y)
 					get_tree().change_scene(room_on_the_left)
 				else:
 					print("Scene ", room_on_the_left ," doesnt exist")
