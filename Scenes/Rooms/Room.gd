@@ -25,23 +25,30 @@ func _ready():
 			has_portals = true
 	player.global_position = PlayerVariables.new_player_position
 	movement = PlayerVariables.movement
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	## DEBUG ##
+
+
 	
-	print(player.position)
+	## SO THAT IS_ON_FLOOR WORKS ALWAYS ##
 	
+
 	
 	## CHARACTER MOVEMENT ##
 	var input = _directional_input()
-
-	if player.is_on_floor() and Input.is_action_just_pressed("ui_accept"):
-		print("pulei")
-		movement.y = PlayerVariables.JUMP
+	
+	
+	if player.can_jump():
+		movement.y = 0
+		if Input.is_action_pressed("ui_accept"):
+			movement.y = PlayerVariables.JUMP
 	else:
 		movement.y += PlayerVariables.GRAVITY * delta
+
 
 	var temp_movement = movement
 	temp_movement.y = 0
@@ -52,6 +59,8 @@ func _process(delta):
 		acceleration = PlayerVariables.ACCEL
 	else:
 		acceleration = PlayerVariables.DEACCEL
+
+
 
 	temp_movement = lerp(temp_movement, Vector2(target, 0), acceleration*delta)
 	movement.x = temp_movement.x

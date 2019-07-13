@@ -99,3 +99,5 @@ position = Vector2( -200, 168 )
 [connection signal="body_entered" from="TileMap/Gate" to="." method="_on_Gate_body_entered"]
 
 [editable path="TileMap/Portals"]
+
+[editable path="Player"]
