@@ -2,9 +2,7 @@ extends Node2D
 
 onready var tilemap : TileMap = $TileMap
 onready var player : KinematicBody2D = $Player
-onready var entrance_area : Area2D = $TileMap/Entrance/Area2D
-onready var entrance_text : Label = $TileMap/Entrance/Area2D/Label
-onready var portals : = $TileMap/Portals
+onready var gate : Area2D = $TileMap/Gate
 
 ## ADJACENT ROOMS ##
 export var room_on_the_left = "scene_uninitialized"
@@ -18,11 +16,12 @@ var room_target = 0
 var gate_direction = Vector2()
 var room_rotation
 var has_portals : bool 
-
+var portals : Area2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for child in tilemap.get_children():
 		if child.name == "Portals":
+			portals = $TileMap/Portals
 			has_portals = true
 	player.global_position = PlayerVariables.new_player_position
 	movement = PlayerVariables.movement
@@ -107,6 +106,7 @@ func _on_Gate_body_entered(body):
 			Vector2.DOWN:
 				if ResourceLoader.exists(room_below):
 					get_tree().change_scene(room_below)
+					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y + 240)
 				else:
 					print("Scene ", room_below ," doesnt exist")
 			Vector2.RIGHT:
@@ -117,11 +117,13 @@ func _on_Gate_body_entered(body):
 					print("Scene ", room_on_the_right ," doesnt exist")
 			Vector2.UP:
 				if ResourceLoader.exists(room_above):
+					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y - 240)
 					get_tree().change_scene(room_above)
 				else:
 					print("Scene ", room_above ," doesnt exist")
 			Vector2.LEFT:
 				if ResourceLoader.exists(room_on_the_left):
+					PlayerVariables.new_player_position = Vector2(player.global_position.x + 240, player.global_position.y)
 					get_tree().change_scene(room_on_the_left)
 				else:
 					print("Scene ", room_on_the_left ," doesnt exist")

@@ -16,7 +16,6 @@ _global_script_class_icons={
 [application]
 
 config/name="Rubix-Truth"
-run/main_scene="res://Scenes/Rooms/Room1_0.1.tscn"
 config/icon="res://icon.png"
 
 [autoload]
