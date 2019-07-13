@@ -29,11 +29,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	## DEBUG ##
+	
+	print(player.position)
+	
 	
 	## CHARACTER MOVEMENT ##
 	var input = _directional_input()
 
 	if player.is_on_floor() and Input.is_action_just_pressed("ui_accept"):
+		print("pulei")
 		movement.y = PlayerVariables.JUMP
 	else:
 		movement.y += PlayerVariables.GRAVITY * delta

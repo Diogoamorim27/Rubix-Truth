@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Prefabs/Portals.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Prefabs/PortalParticles.tres" type="Material" id=2]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -24, 8 )
@@ -19,10 +20,26 @@ position = Vector2( -40, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal1"]
 shape = SubResource( 1 )
 
+[node name="Particles2D" type="Particles2D" parent="Portal1"]
+position = Vector2( 0, 8 )
+amount = 32
+lifetime = 3.0
+preprocess = 3.0
+speed_scale = 0.5
+process_material = ExtResource( 2 )
+
 [node name="Portal2" type="Area2D" parent="."]
 position = Vector2( 40, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal2"]
 shape = SubResource( 2 )
+
+[node name="Particles2D2" type="Particles2D" parent="Portal2"]
+position = Vector2( 0, 8 )
+amount = 32
+lifetime = 3.0
+preprocess = 3.0
+speed_scale = 0.5
+process_material = ExtResource( 2 )
 [connection signal="body_entered" from="Portal1" to="." method="_on_Portal1_body_entered"]
 [connection signal="body_entered" from="Portal2" to="." method="_on_Portal2_body_entered"]

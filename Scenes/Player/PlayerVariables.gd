@@ -4,7 +4,7 @@ extends Node
 # var a = 2
 # var b = "text"
 
-const MOVE_SPEED = 50
+const MOVE_SPEED = 75
 const GRAVITY = 9.8 * 20
 const ACCEL = 20
 const DEACCEL = 10

@@ -1,11 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [sub_resource type="SegmentShape2D" id=1]
+a = Vector2( 0, -24 )
+b = Vector2( 0, 24 )
+
+[sub_resource type="SegmentShape2D" id=2]
 a = Vector2( 0, -24 )
 b = Vector2( 0, 24 )
 
 [node name="Gate" type="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -8, 0 )
+position = Vector2( 16, 0 )
 shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 8, 0 )
+shape = SubResource( 2 )
