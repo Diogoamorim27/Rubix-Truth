@@ -5,7 +5,7 @@ onready var player : KinematicBody2D = $Player
 onready var gate : Area2D = $TileMap/Gate
 onready var gates : Node = $TileMap/Gates
 onready var player_animator : AnimationPlayer = $Player/AnimationPlayer
-
+onready var player_sprite : = $Player/Sprite
 ## ADJACENT ROOMS ##
 export var room_on_the_left = "scene_uninitialized"
 export var room_on_the_right = "scene_uninitialized"
@@ -21,13 +21,21 @@ var room_rotation
 var has_portals : bool 
 var portals : Area2D
 var last_gate_direction = Vector2()
+
 var is_dying : = false
+
+## STATE VARS ##
+var idle : = "idle"
+var die : = "die"
+var jump : = "jump"
+var run : = "run"
+
+var audio_over = false
+
+var state : = idle
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	## chekcing if singleton works
-
-
-	
 	## CHECK FOR PORTALS ##
 	
 	for child in tilemap.get_children():
@@ -45,33 +53,52 @@ func _ready():
 func _process(delta):
 	## DEBUG ##
 
-
-	## CHARACTER MOVEMENT ##
-	var input = _directional_input()
+	## NEW STATE LOGIC ##
 	
-	## JUMP / APPLY GRAVITY ##
-	if player.can_jump():
-		movement.y = 0
-		if Input.is_action_pressed("ui_accept"):
-			movement.y = PlayerVariables.JUMP
-	else:
-		movement.y += PlayerVariables.GRAVITY * delta
+	match state:
+		idle:
+			_apply_movement(0, delta)
+			player_animator.play("idle")
+			if is_dying:
+				state = die
+			elif player.can_jump():
+				if _directional_input():
+						state = run
+			else:
+				state = jump
+		die: 
+			_apply_movement(0, delta)
+			_apply_gravity(delta)
+			if player_animator.current_animation != "die":
+				player_animator.play("die")
+				
+		run:
+			if player_animator.current_animation != "running":
+				player_animator.play("running")
+			if player.can_jump():
+				var input = _directional_input()
+				_apply_movement(input, delta)
+			else: 
+				state = jump
+			
+		jump:
+			if player_animator.current_animation != "jump":
+				player_animator.play("jump")
+			var input = _directional_input()
+			_apply_movement(input, delta)
+			_apply_gravity(delta)
+			
+			if player.can_jump():
+				state = idle
+			
+			pass
 
-	## HORIZONTAL MOVEMENT ##
-	var temp_movement = movement
-	temp_movement.y = 0
-	var target = input * PlayerVariables.MOVE_SPEED
-	var acceleration
+	if state != die:
+		if movement.x < 0.1:
+			player_sprite.flip_h = true
+		else:
+			player_sprite.flip_h = false
 
-	if input * temp_movement.x > 0:
-		acceleration = PlayerVariables.ACCEL
-	else:
-		acceleration = PlayerVariables.DEACCEL
-
-
-
-	temp_movement = lerp(temp_movement, Vector2(target, 0), acceleration*delta)
-	movement.x = temp_movement.x
 
 	## PORTAL LOGIC ##
 	if has_portals:
@@ -86,11 +113,6 @@ func _process(delta):
 
 
 	## ROOM ROTATION ##
-	if Input.is_action_just_pressed("q"): # and rotation_active:
-		room_target -= 90
-
-	elif Input.is_action_just_pressed("e"): # and is_current_room and rotation_active:
-		room_target += 90
 
 	tilemap.rotation_degrees = lerp(tilemap.rotation_degrees, room_target, PlayerVariables.ROOM_ACCEL*delta)
 	
@@ -133,22 +155,7 @@ func _process(delta):
 #			pass
 
 func _directional_input() -> int:
-	if !(Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left")):
-		balance = 0
-		return 0
-
-	if Input.is_action_pressed("ui_right") and !Input.is_action_pressed("ui_left"):
-		balance = 1
-		return 1
-
-	if !Input.is_action_pressed("ui_right") and Input.is_action_pressed("ui_left"):
-		balance = -1
-		return -1
-
-	if balance == 1 and Input.is_action_pressed("ui_left"):
-		return -1
-
-	if balance == -1 and Input.is_action_pressed("ui_right"):
+	if audio_over:
 		return 1
 
 	return 0
@@ -156,42 +163,29 @@ func _directional_input() -> int:
 
 func _on_Gate_body_entered(body):
 	if body.name == "Player":
-		PlayerVariables.movement = movement
-		match gate_direction:
-			Vector2.DOWN:
-				if ResourceLoader.exists(room_below):
-					PlayerVariables.ComingFrom = PlayerVariables.UP
-					get_tree().change_scene(room_below)
-					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y + 256)
-				else:
-					print("Scene ", room_below ," doesnt exist")
-			Vector2.RIGHT:
-				if ResourceLoader.exists(room_on_the_right):
-					PlayerVariables.ComingFrom = PlayerVariables.LEFT
-					PlayerVariables.new_player_position = Vector2(player.global_position.x - 256, player.global_position.y)
-					get_tree().change_scene(room_on_the_right)
-				else:
-					print("Scene ", room_on_the_right ," doesnt exist")
-			Vector2.UP:
-				if ResourceLoader.exists(room_above):
-					PlayerVariables.ComingFrom = PlayerVariables.DOWN
-					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y - 256)
-					get_tree().change_scene(room_above)
-				else:
-					print("Scene ", room_above ," doesnt exist")
-			Vector2.LEFT:
-				if ResourceLoader.exists(room_on_the_left): 
-					PlayerVariables.ComingFrom = PlayerVariables.RIGHT
-					PlayerVariables.new_player_position = Vector2(player.global_position.x + 256, player.global_position.y)
-					get_tree().change_scene(room_on_the_left)
-				else:
-					print("Scene ", room_on_the_left ," doesnt exist")
-			_:
-				print("Gate direction invalid")
+		get_tree().change_scene(room_on_the_right)
+
+func _apply_movement(input, delta):
+	var temp_movement = movement
+	temp_movement.y = 0
+	var target = input * PlayerVariables.MOVE_SPEED
+	var acceleration
+
+	if input * temp_movement.x > 0:
+		acceleration = PlayerVariables.ACCEL
+	else:
+		acceleration = PlayerVariables.DEACCEL
+
+	temp_movement = lerp(temp_movement, Vector2(target, 0), acceleration*delta)
+	movement.x = temp_movement.x
+	pass
+	
+func _apply_gravity(delta):
+	movement.y += PlayerVariables.GRAVITY * delta
+	pass
 
 
 
-func _on_Area2D_body_entered(body):
-	if body.name == "Player":
-		is_dying = true
+func _on_AudioStreamPlayer_finished():
+	audio_over = true
 	pass # Replace with function body.

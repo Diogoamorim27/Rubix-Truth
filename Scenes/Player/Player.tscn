@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "die"
 length = 2.0
 tracks/0/type = "value"
@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ 17, 18, 17, 18, 17, 18, 19, 20 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
@@ -38,8 +38,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "jump"
+[sub_resource type="Animation" id=4]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -54,8 +53,7 @@ tracks/0/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "running"
+[sub_resource type="Animation" id=5]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -84,7 +82,7 @@ scale = Vector2( 1, 1.03829 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 21
-frame = 1
+frame = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -94,7 +92,7 @@ enabled = true
 cast_to = Vector2( 0, 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 4 )
-anims/idle = SubResource( 5 )
-anims/jump = SubResource( 3 )
-anims/running = SubResource( 2 )
+anims/die = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/jump = SubResource( 4 )
+anims/running = SubResource( 5 )
