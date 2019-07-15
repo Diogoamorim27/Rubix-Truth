@@ -12,6 +12,7 @@ export var room_on_the_right = "scene_uninitialized"
 export var room_above = "scene_uninitialized"
 export var room_below = "scene_uninitialized"
 export var room_index : int
+export var next_scene : = ""
 
 var balance = 0
 var movement : = Vector2()
@@ -32,9 +33,9 @@ var run : = "run"
 
 var state : = idle
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	## chekcing if singleton works
-	## CHECK FOR PORTALS ##
+func _ready():	## CHECK FOR PORTALS ##
+	## new ver ##
+	
 	
 	for child in tilemap.get_children():
 		if child.name == "Portals":
@@ -42,7 +43,6 @@ func _ready():
 			has_portals = true
 			
 	## INITIALIZE PLAYER VARIABLES
-	
 #	player.global_position = PlayerVariables.new_player_position
 	movement = PlayerVariables.movement
 	pass # Replace with function body.
@@ -52,7 +52,6 @@ func _process(delta):
 	## DEBUG ##
 
 	## NEW STATE LOGIC ##
-	
 	match state:
 		idle:
 			_apply_movement(0, delta)
@@ -101,8 +100,10 @@ func _process(delta):
 				state = idle
 			
 			pass
+			
+		
 
-	if state != die:
+	if state != die and state != idle:
 		if movement.x < 0.1:
 			player_sprite.flip_h = true
 		else:
@@ -133,6 +134,7 @@ func _process(delta):
 	
 	## NEXT ROOM DECIDER ##
 	last_gate_direction = gate_direction
+	
 	gate_direction = Vector2(round(cos(deg2rad(room_target))),round(sin(deg2rad(room_target))))
 
 	## HANDLE ANIMATION #
@@ -142,27 +144,28 @@ func _process(delta):
 	
 	if last_gate_direction != gate_direction:
 		for gate in gates.get_children():
-			match gate_direction:
-				Vector2.DOWN:
-					if ResourceLoader.exists(room_below):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
-				Vector2.UP:
-					if ResourceLoader.exists(room_above):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
-				Vector2.LEFT:
-					if ResourceLoader.exists(room_on_the_left):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
-				Vector2.RIGHT:
-					if ResourceLoader.exists(room_on_the_right):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
+			gate.locked.disabled = true
+#			match gate_direction:
+#				Vector2.DOWN:
+#					if ResourceLoader.exists(room_below):
+#						gate.locked.disabled = true
+#					else: 
+#						gate.locked.disabled = false
+#				Vector2.UP:
+#					if ResourceLoader.exists(room_above):
+#						gate.locked.disabled = true
+#					else: 
+#						gate.locked.disabled = false
+#				Vector2.LEFT:
+#					if ResourceLoader.exists(room_on_the_left):
+#						gate.locked.disabled = true
+#					else: 
+#						gate.locked.disabled = false
+#				Vector2.RIGHT:
+#					if ResourceLoader.exists(room_on_the_right):
+#						gate.locked.disabled = true
+#					else: 
+#						gate.locked.disabled = false
 
 #func _animation_handler() -> void:
 #	match player_animator.current_animation:
@@ -193,38 +196,39 @@ func _directional_input() -> int:
 
 func _on_Gate_body_entered(body):
 	if body.name == "Player":
-		PlayerVariables.movement = movement
-		match gate_direction:
-			Vector2.DOWN:
-				if ResourceLoader.exists(room_below):
-#					PlayerVariables.ComingFrom = PlayerVariables.UP
-					get_tree().change_scene(room_below)
-					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y + 256)
-				else:
-					print("Scene ", room_below ," doesnt exist")
-			Vector2.RIGHT:
-				if ResourceLoader.exists(room_on_the_right):
-#					PlayerVariables.ComingFrom = PlayerVariables.LEFT
-					PlayerVariables.new_player_position = Vector2(player.global_position.x - 256, player.global_position.y)
-					get_tree().change_scene(room_on_the_right)
-				else:
-					print("Scene ", room_on_the_right ," doesnt exist")
-			Vector2.UP:
-				if ResourceLoader.exists(room_above):
-#					PlayerVariables.ComingFrom = PlayerVariables.DOWN
-					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y - 256)
-					get_tree().change_scene(room_above)
-				else:
-					print("Scene ", room_above ," doesnt exist")
-			Vector2.LEFT:
-				if ResourceLoader.exists(room_on_the_left): 
-#					PlayerVariables.ComingFrom = PlayerVariables.RIGHT
-					PlayerVariables.new_player_position = Vector2(player.global_position.x + 256, player.global_position.y)
-					get_tree().change_scene(room_on_the_left)
-				else:
-					print("Scene ", room_on_the_left ," doesnt exist")
-			_:
-				print("Gate direction invalid")
+		get_tree().change_scene(next_scene)
+#		PlayerVariables.movement = movement
+#		match gate_direction:
+#			Vector2.DOWN:
+#				if ResourceLoader.exists(room_below):
+##					PlayerVariables.ComingFrom = PlayerVariables.UP
+#					get_tree().change_scene(room_below)
+#					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y + 256)
+#				else:
+#					print("Scene ", room_below ," doesnt exist")
+#			Vector2.RIGHT:
+#				if ResourceLoader.exists(room_on_the_right):
+##					PlayerVariables.ComingFrom = PlayerVariables.LEFT
+#					PlayerVariables.new_player_position = Vector2(player.global_position.x - 256, player.global_position.y)
+#					get_tree().change_scene(room_on_the_right)
+#				else:
+#					print("Scene ", room_on_the_right ," doesnt exist")
+#			Vector2.UP:
+#				if ResourceLoader.exists(room_above):
+##					PlayerVariables.ComingFrom = PlayerVariables.DOWN
+#					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y - 256)
+#					get_tree().change_scene(room_above)
+#				else:
+#					print("Scene ", room_above ," doesnt exist")
+#			Vector2.LEFT:
+#				if ResourceLoader.exists(room_on_the_left): 
+##					PlayerVariables.ComingFrom = PlayerVariables.RIGHT
+#					PlayerVariables.new_player_position = Vector2(player.global_position.x + 256, player.global_position.y)
+#					get_tree().change_scene(room_on_the_left)
+#				else:
+#					print("Scene ", room_on_the_left ," doesnt exist")
+#			_:
+#				print("Gate direction invalid")
 
 func _apply_movement(input, delta):
 	var temp_movement = movement
@@ -255,4 +259,10 @@ func _on_Area2D_body_entered(body):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "die":
 		get_tree().reload_current_scene()
+	pass # Replace with function body.
+
+
+func _on_Gate2_body_entered(body):
+	if body.name == "Player":
+		get_tree().change_scene(next_scene)
 	pass # Replace with function body.

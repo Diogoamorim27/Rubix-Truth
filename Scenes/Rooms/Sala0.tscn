@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Rooms/NewRoomCode.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Rooms/ScreenShake.gd" type="Script" id=2]
@@ -6,13 +6,11 @@
 [ext_resource path="res://Assets/Crumbling-Mike_Koenig-1123041125.wav" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/Rooms/AudioStreamPlayer.gd" type="Script" id=5]
 [ext_resource path="res://Assets/black.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Degrade.tres" type="Texture" id=7]
-[ext_resource path="res://Scenes/Rooms/Sprite2.gd" type="Script" id=8]
-[ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=9]
-[ext_resource path="res://Assets/my_wall.png" type="Texture" id=10]
-[ext_resource path="res://Assets/mushy.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/Prefabs/Gate.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=7]
+[ext_resource path="res://Assets/my_wall.png" type="Texture" id=8]
+[ext_resource path="res://Assets/mushy.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Prefabs/Gate.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -28,33 +26,8 @@ angle_random = 1.0
 scale = 10.0
 scale_random = 1.0
 
-[sub_resource type="Animation" id=2]
-resource_name = "close"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 48.76 ), Vector2( 1, 1e-005 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 32, 216 ), Vector2( 32, 240 ) ]
-}
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -65,12 +38,9 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="TileSet" id=7]
+[sub_resource type="TileSet" id=6]
 0/name = "Witchcraft_spr_sheets_V1_0.png 0"
-0/texture = ExtResource( 9 )
+0/texture = ExtResource( 7 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 446, 120, 16, 16 )
@@ -81,12 +51,12 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
 1/name = "Witchcraft_spr_sheets_V1_0.png 1"
-1/texture = ExtResource( 9 )
+1/texture = ExtResource( 7 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 382, 120, 16, 16 )
@@ -97,18 +67,18 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
 2/name = "Witchcraft_spr_sheets_V1_0.png 2"
-2/texture = ExtResource( 9 )
+2/texture = ExtResource( 7 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 414, 120, 16, 16 )
@@ -118,7 +88,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "my_wall.png 3"
-3/texture = ExtResource( 10 )
+3/texture = ExtResource( 8 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 16, 16 )
@@ -129,12 +99,12 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
 4/name = "mushy.png 4"
-4/texture = ExtResource( 11 )
+4/texture = ExtResource( 9 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 0, 16, 16 )
@@ -144,7 +114,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "mushy.png 5"
-5/texture = ExtResource( 11 )
+5/texture = ExtResource( 9 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 16, 0, 16, 16 )
@@ -154,7 +124,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "mushy.png 6"
-6/texture = ExtResource( 11 )
+6/texture = ExtResource( 9 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 32, 0, 16, 16 )
@@ -164,10 +134,23 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 6/shapes = [  ]
 6/z_index = 0
 
-[node name="Sala1" type="Node2D"]
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 3.23469e-025
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 90.0
+scale = 4.0
+scale_random = 1.0
+
+[node name="Sala0" type="Node2D"]
 position = Vector2( 3.52859e-005, 0 )
 script = ExtResource( 1 )
 room_on_the_right = "res://Scenes/Rooms/Sala1.tscn"
+next_scene = "res://Scenes/Rooms/Sala1.tscn"
 
 [node name="ScreenShake" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -190,6 +173,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenShake"]
+editor/display_folded = true
 stream = ExtResource( 4 )
 script = ExtResource( 5 )
 
@@ -206,34 +190,29 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite2" type="Sprite" parent="."]
-editor/display_folded = true
-position = Vector2( 32, 240 )
-scale = Vector2( 1, 1e-005 )
-texture = ExtResource( 7 )
-flip_h = true
-region_enabled = true
-region_rect = Rect2( 0, 0, 64, 1 )
-script = ExtResource( 8 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2"]
-anims/close = SubResource( 2 )
-
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 128, 128 )
-tile_set = SubResource( 7 )
+tile_set = SubResource( 6 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 262135, 1, 0, 262136, -1073741823, 0, 262137, -1073741823, 0, 262138, -1073741823, 0, 262139, -1073741823, 0, 262140, -1073741823, 0, 262141, -1073741823, 0, 262142, -1073741823, 0, 262143, -1073741823, 0, 196608, -1073741823, 0, 196609, -1073741823, 0, 196610, -1073741823, 0, 196611, -1073741823, 0, 196612, -1073741823, 0, 196613, -1073741823, 0, 196614, -1073741823, 0, 196615, -1073741823, 0, 196616, -1073741823, 0, 327671, 1, 0, 393207, 1, 0, 458743, 1, 0, 524279, 1, 0, 524280, -1610612735, 0, 524281, -1610612735, 0, 524282, -1610612735, 0, 524283, -1610612735, 0, 524284, -1610612735, 0, 524285, -1610612735, 0, 524286, -1610612735, 0, 524287, -1610612735, 0, 458752, -1610612735, 0, 458753, -1610612735, 0, 458754, -1610612735, 0, 458755, -1610612735, 0, 458756, -1610612735, 0, 458757, -1610612735, 0, 458758, -1610612735, 0, 458759, -1610612735, 0 )
+tile_data = PoolIntArray( -458755, -1073741824, 0, -524286, 0, 0, -393220, -1073741824, 0, -458749, 0, 0, -327685, -1073741824, 0, -393212, 0, 0, -262150, -1073741824, 0, -327675, 0, 0, -196615, -1073741824, 0, -262138, 0, 0, -262137, 2, 0, -131080, -1073741824, 0, -131073, -1610612736, 0, -196608, 1610612736, 0, -196601, 1, 0, -65538, -1610612736, 0, -131071, 1610612736, 0, -131065, 1, 0, -3, -1610612736, 0, -65534, 1610612736, 0, -65529, 1, 0, 65533, 0, 0, 2, -1073741824, 0, 7, 1, 0, 131070, 0, 0, 65537, -1073741824, 0, 65543, 1, 0, 196600, 1610612736, 0, 196607, 0, 0, 131072, -1073741824, 0, 131079, 1, 0, 262137, 1610612736, 0, 196614, -1610612736, 0, 196615, -1610612734, 0, 327674, 1610612736, 0, 262149, -1610612736, 0, 393211, 1610612736, 0, 327684, -1610612736, 0, 458748, 1610612736, 0, 393219, -1610612736, 0, 524284, 1610612738, 0, 524285, -1610612735, 0, 524286, -1610612735, 0, 524287, -1610612735, 0, 458752, -1610612735, 0, 458753, -1610612735, 0, 458754, -1610612735, 0, 458755, -1610612734, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Particles2D" type="Particles2D" parent="TileMap"]
+amount = 24
+process_material = SubResource( 7 )
 
 [node name="Gates" type="Node2D" parent="TileMap"]
 
-[node name="Gate" parent="TileMap/Gates" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
+[node name="Gate" parent="TileMap/Gates" instance=ExtResource( 10 )]
+position = Vector2( -3.05176e-005, -120 )
+rotation = -1.57079
 
-[node name="Player" parent="." instance=ExtResource( 13 )]
+[node name="Player" parent="." instance=ExtResource( 11 )]
 editor/display_folded = true
-position = Vector2( 120, 224 )
+position = Vector2( 24, 144 )
 [connection signal="timeout" from="ScreenShake/Timer" to="ScreenShake" method="_on_Timer_timeout"]
 [connection signal="finished" from="ScreenShake/AudioStreamPlayer" to="ScreenShake" method="_on_AudioStreamPlayer_finished"]
 [connection signal="timeout" from="ScreenShake/AudioStreamPlayer/Timer" to="ScreenShake/AudioStreamPlayer" method="_on_Timer_timeout"]

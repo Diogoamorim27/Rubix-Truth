@@ -1,34 +1,17 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Rooms/Cutscene.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Rooms/ScreenShake.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Rooms/Particles2D.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Crumbling-Mike_Koenig-1123041125.wav" type="AudioStream" id=4]
-[ext_resource path="res://Scenes/Rooms/AudioStreamPlayer.gd" type="Script" id=5]
-[ext_resource path="res://Assets/black.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Degrade.tres" type="Texture" id=7]
-[ext_resource path="res://Scenes/Rooms/Sprite2.gd" type="Script" id=8]
-[ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=9]
-[ext_resource path="res://Assets/my_wall.png" type="Texture" id=10]
-[ext_resource path="res://Assets/mushy.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/Prefabs/Gate.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Prefabs/ScreenShake.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/black.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Degrade.tres" type="Texture" id=4]
+[ext_resource path="res://Scenes/Rooms/Sprite2.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=6]
+[ext_resource path="res://Assets/my_wall.png" type="Texture" id=7]
+[ext_resource path="res://Assets/mushy.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Prefabs/Gate.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=10]
 
-[sub_resource type="ParticlesMaterial" id=1]
-emission_shape = 2
-emission_box_extents = Vector3( 128, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 98, 0 )
-angular_velocity = 60.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 45.0
-angle_random = 1.0
-scale = 10.0
-scale_random = 1.0
-
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=1]
 resource_name = "close"
 length = 2.0
 tracks/0/type = "value"
@@ -70,7 +53,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="TileSet" id=6]
 0/name = "Witchcraft_spr_sheets_V1_0.png 0"
-0/texture = ExtResource( 9 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 446, 120, 16, 16 )
@@ -86,7 +69,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 0/z_index = 0
 1/name = "Witchcraft_spr_sheets_V1_0.png 1"
-1/texture = ExtResource( 9 )
+1/texture = ExtResource( 6 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 382, 120, 16, 16 )
@@ -108,7 +91,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 1/z_index = 0
 2/name = "Witchcraft_spr_sheets_V1_0.png 2"
-2/texture = ExtResource( 9 )
+2/texture = ExtResource( 6 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 414, 120, 16, 16 )
@@ -118,7 +101,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "my_wall.png 3"
-3/texture = ExtResource( 10 )
+3/texture = ExtResource( 7 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 16, 16 )
@@ -134,7 +117,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 3/z_index = 0
 4/name = "mushy.png 4"
-4/texture = ExtResource( 11 )
+4/texture = ExtResource( 8 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 0, 16, 16 )
@@ -144,7 +127,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "mushy.png 5"
-5/texture = ExtResource( 11 )
+5/texture = ExtResource( 8 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 16, 0, 16, 16 )
@@ -154,7 +137,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "mushy.png 6"
-6/texture = ExtResource( 11 )
+6/texture = ExtResource( 8 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 32, 0, 16, 16 )
@@ -167,57 +150,33 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [node name="Cutscene" type="Node2D"]
 position = Vector2( 3.52859e-005, 0 )
 script = ExtResource( 1 )
-room_on_the_right = "res://Scenes/Rooms/Sala1.tscn"
+room_on_the_left = null
+room_on_the_right = "res://Scenes/Rooms/Sala0.tscn"
+room_above = null
+room_below = null
 
-[node name="ScreenShake" type="Node" parent="."]
-script = ExtResource( 2 )
-
-[node name="Particles2D" type="Particles2D" parent="ScreenShake"]
-position = Vector2( 128, 0 )
-emitting = false
-amount = 10
-lifetime = 2.0
-one_shot = true
-process_material = SubResource( 1 )
-script = ExtResource( 3 )
-
-[node name="Camera2D" type="Camera2D" parent="ScreenShake"]
-position = Vector2( 128, 128 )
-current = true
-
-[node name="Timer" type="Timer" parent="ScreenShake"]
-wait_time = 0.1
-autostart = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreenShake"]
-stream = ExtResource( 4 )
-script = ExtResource( 5 )
-
-[node name="Timer" type="Timer" parent="ScreenShake/AudioStreamPlayer"]
-wait_time = 0.5
-one_shot = true
-autostart = true
+[node name="ScreenShake" parent="." instance=ExtResource( 2 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 128, 128 )
 scale = Vector2( 18, 18 )
-texture = ExtResource( 6 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="ClosingDoor" type="Sprite" parent="."]
 editor/display_folded = true
 position = Vector2( 32, 240 )
 scale = Vector2( 1, 1e-005 )
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 flip_h = true
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 1 )
-script = ExtResource( 8 )
+script = ExtResource( 5 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2"]
-anims/close = SubResource( 7 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ClosingDoor"]
+anims/close = SubResource( 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 128, 128 )
@@ -228,19 +187,17 @@ tile_data = PoolIntArray( 262135, 1, 0, 262136, -1073741823, 0, 262137, -1073741
 
 [node name="Gates" type="Node2D" parent="TileMap"]
 
-[node name="Gate" parent="TileMap/Gates" instance=ExtResource( 12 )]
+[node name="Gate" parent="TileMap/Gates" instance=ExtResource( 9 )]
 position = Vector2( 120, 88 )
 
-[node name="Player" parent="." instance=ExtResource( 13 )]
+[node name="Player" parent="." instance=ExtResource( 10 )]
 position = Vector2( 120, 224 )
 
 [node name="Sprite" parent="Player" index="0"]
 frame = 0
-[connection signal="timeout" from="ScreenShake/Timer" to="ScreenShake" method="_on_Timer_timeout"]
 [connection signal="finished" from="ScreenShake/AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
-[connection signal="finished" from="ScreenShake/AudioStreamPlayer" to="ScreenShake" method="_on_AudioStreamPlayer_finished"]
-[connection signal="timeout" from="ScreenShake/AudioStreamPlayer/Timer" to="ScreenShake/AudioStreamPlayer" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="TileMap/Gates/Gate" to="." method="_on_Gate_body_entered"]
-[connection signal="animation_finished" from="Player/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="ScreenShake"]
 
 [editable path="Player"]

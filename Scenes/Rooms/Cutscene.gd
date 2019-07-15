@@ -6,6 +6,8 @@ onready var gate : Area2D = $TileMap/Gate
 onready var gates : Node = $TileMap/Gates
 onready var player_animator : AnimationPlayer = $Player/AnimationPlayer
 onready var player_sprite : = $Player/Sprite
+onready var screen_shake : = $ScreenShake
+onready var schake_audio_player : = $ScreenShake/AudioStreamPlayer
 ## ADJACENT ROOMS ##
 export var room_on_the_left = "scene_uninitialized"
 export var room_on_the_right = "scene_uninitialized"
@@ -189,3 +191,7 @@ func _apply_gravity(delta):
 func _on_AudioStreamPlayer_finished():
 	audio_over = true
 	pass # Replace with function body.
+
+func _screen_shake():
+	screen_shake.stop_shake = false
+	screen_shake.$AudioStreamPlayer.play(0)
