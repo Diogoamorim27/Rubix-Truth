@@ -162,7 +162,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [node name="TemplateSala" type="Node2D"]
 position = Vector2( 3.52859e-005, 0 )
 script = ExtResource( 1 )
-next_scene = "res://Scenes/Rooms/Sala5.tscn"
+next_scene = "res://Scenes/Rooms/SalaFinal.tscn"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 128, 128 )

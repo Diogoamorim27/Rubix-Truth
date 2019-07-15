@@ -1,0 +1,182 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Scenes/Rooms/NewRoomCode.gd" type="Script" id=1]
+[ext_resource path="res://Assets/black.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Prefabs/ScreenShake.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=4]
+[ext_resource path="res://Assets/my_wall.png" type="Texture" id=5]
+[ext_resource path="res://Assets/mushy.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Prefabs/Gate.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Prefabs/Chest.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Prefabs/Chest.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=10]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=5]
+0/name = "Witchcraft_spr_sheets_V1_0.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 446, 120, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "Witchcraft_spr_sheets_V1_0.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 382, 120, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "Witchcraft_spr_sheets_V1_0.png 2"
+2/texture = ExtResource( 4 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 414, 120, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shapes = [  ]
+2/z_index = 0
+3/name = "my_wall.png 3"
+3/texture = ExtResource( 5 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+4/name = "mushy.png 4"
+4/texture = ExtResource( 6 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 16, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shapes = [  ]
+4/z_index = 0
+5/name = "mushy.png 5"
+5/texture = ExtResource( 6 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 16, 0, 16, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shapes = [  ]
+5/z_index = 0
+6/name = "mushy.png 6"
+6/texture = ExtResource( 6 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 32, 0, 16, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shapes = [  ]
+6/z_index = 0
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 3.23469e-025
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 90.0
+scale = 4.0
+scale_random = 1.0
+
+[node name="Sala0" type="Node2D"]
+position = Vector2( 3.52859e-005, 0 )
+script = ExtResource( 1 )
+next_scene = "res://Scenes/Rooms/Sala1.tscn"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 128, 128 )
+scale = Vector2( 18, 18 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScreenShake" parent="." instance=ExtResource( 3 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 128, 128 )
+tile_set = SubResource( 5 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -458755, -1073741824, 0, -458754, 1610612740, 0, -458753, 1610612742, 0, -524287, -1073741818, 0, -524286, 0, 0, -393220, -1073741824, 0, -393219, 1610612742, 0, -458750, -1073741820, 0, -458749, 0, 0, -327685, -1073741824, 0, -393214, 1610612741, 0, -393213, 1610612740, 0, -393212, 0, 0, -262150, -1073741824, 0, -262149, -1610612731, 0, -327675, 0, 0, -196615, -1073741824, 0, -196614, -1610612732, 0, -262139, -1073741818, 0, -262138, 0, 0, -262137, 2, 0, -131080, -1073741824, 0, -131079, 1610612740, 0, -131078, 1610612742, 0, -196601, 1, 0, -131065, 1, 0, -65529, 1, 0, 7, 1, 0, 131071, -1610612736, 0, 65536, 1610612736, 0, 65543, 1, 0, 196600, 1610612736, 0, 196606, -1610612736, 0, 131073, 1610612736, 0, 131078, 6, 0, 131079, 1, 0, 262137, 1610612736, 0, 262141, -1610612736, 0, 196610, 1610612736, 0, 196613, 6, 0, 196614, -1610612736, 0, 196615, -1610612734, 0, 327674, 1610612736, 0, 327676, -1610612736, 0, 262147, 1610612736, 0, 262149, -1610612736, 0, 393211, 1610612736, 0, 393212, -1610612734, 0, 327683, 1610612738, 0, 327684, -1610612736, 0, 458748, 1610612736, 0, 393219, -1610612736, 0, 524284, 1610612738, 0, 524285, 1610612736, 0, 524286, 2, 0, 458753, -1073741822, 0, 458754, -1610612736, 0, 458755, -1610612734, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Particles2D" type="Particles2D" parent="TileMap"]
+amount = 24
+process_material = SubResource( 6 )
+
+[node name="Gate" parent="TileMap" instance=ExtResource( 7 )]
+position = Vector2( 0, -144 )
+rotation = -1.57079
+
+[node name="Chest" parent="TileMap" instance=ExtResource( 8 )]
+position = Vector2( 0, 7.99999 )
+scale = Vector2( 1.68, 1.68 )
+script = ExtResource( 9 )
+
+[node name="Player" parent="." instance=ExtResource( 10 )]
+editor/display_folded = true
+position = Vector2( 7.99997, 152 )
+[connection signal="body_entered" from="TileMap/Gate" to="." method="_on_Gate_body_entered"]
+[connection signal="animation_finished" from="Player/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="ScreenShake"]
+
+[editable path="TileMap/Chest"]
+
+[editable path="Player"]

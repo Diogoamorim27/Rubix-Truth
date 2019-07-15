@@ -25,5 +25,5 @@ func _process(delta):
 
 
 func _on_TextureButton_pressed():
-	get_tree().change_scene("res://Scenes/Rooms/Cutscene.tscn")
+	get_tree().change_scene("res://Scenes/Rooms/Intro.tscn")
 	pass # Replace with function body.

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Rooms/Outro.gd" type="Script" id=1]
+[ext_resource path="res://Assets/black.png" type="Texture" id=2]
+[ext_resource path="res://Assets/font.tres" type="DynamicFont" id=3]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 3 )
+
+[node name="Outro" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="black" type="Sprite" parent="."]
+position = Vector2( 130, 130 )
+scale = Vector2( 16.75, 16.75 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 310.0
+margin_bottom = 24.0
+theme = SubResource( 1 )
+text = "E dentro do bau havia um 
+pergaminho. E no pergaminho 
+estava escrito:
+
+\"Voce nãao precisa de 
+pergaminhos magicos.
+Ir bem na faculdade nãao e so
+o que importa. So uma bruxa 
+poderosa saberia chegar ate
+aqui!\""

@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Assets/black.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Title.png" type="Texture" id=3]
-[ext_resource path="res://Assets/play_button.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Crumbling-Mike_Koenig-1123041125.wav" type="AudioStream" id=5]
-[ext_resource path="res://Assets/particles.tres" type="Material" id=6]
+[ext_resource path="res://Assets/font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/play_button.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Crumbling-Mike_Koenig-1123041125.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/particles.tres" type="Material" id=7]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 4 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -28,12 +32,20 @@ position = Vector2( 136, 96 )
 scale = Vector2( 4.5, 4.5 )
 texture = ExtResource( 3 )
 
+[node name="Label" type="Label" parent="."]
+margin_left = 144.0
+margin_top = 240.0
+margin_right = 250.0
+margin_bottom = 256.0
+theme = SubResource( 1 )
+text = "W, A, S, D, Q, E"
+
 [node name="TextureButton" type="TextureButton" parent="."]
 margin_left = 80.0
 margin_top = 96.0
 margin_right = 184.0
 margin_bottom = 200.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 expand = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -41,11 +53,11 @@ position = Vector2( 128, 128 )
 current = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 128, 0 )
 emitting = false
 one_shot = true
-process_material = ExtResource( 6 )
+process_material = ExtResource( 7 )
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

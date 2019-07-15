@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 7.08099, 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "die"
