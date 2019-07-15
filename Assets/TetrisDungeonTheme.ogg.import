@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/TetrisDungeonTheme.ogg-e622be0632f2cda8158ee25449c5de9a.oggstr"
+
+[deps]
+
+source_file="res://Assets/TetrisDungeonTheme.ogg"
+dest_files=[ "res://.import/TetrisDungeonTheme.ogg-e622be0632f2cda8158ee25449c5de9a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

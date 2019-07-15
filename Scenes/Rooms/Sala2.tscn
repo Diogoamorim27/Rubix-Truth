@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Scenes/Rooms/NewRoomCode.gd" type="Script" id=1]
 [ext_resource path="res://Assets/black.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=3]
-[ext_resource path="res://Assets/my_wall.png" type="Texture" id=4]
-[ext_resource path="res://Assets/mushy.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/Prefabs/Hazard.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Prefabs/Portals.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Prefabs/ScreenShake.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Witchcraft_spr_sheets_V1_0.png" type="Texture" id=4]
+[ext_resource path="res://Assets/my_wall.png" type="Texture" id=5]
+[ext_resource path="res://Assets/mushy.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Prefabs/Hazard.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Prefabs/Gate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=9]
 
@@ -24,7 +24,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="TileSet" id=5]
 0/name = "Witchcraft_spr_sheets_V1_0.png 0"
-0/texture = ExtResource( 3 )
+0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 446, 120, 16, 16 )
@@ -40,7 +40,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 0/z_index = 0
 1/name = "Witchcraft_spr_sheets_V1_0.png 1"
-1/texture = ExtResource( 3 )
+1/texture = ExtResource( 4 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 382, 120, 16, 16 )
@@ -62,7 +62,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 1/z_index = 0
 2/name = "Witchcraft_spr_sheets_V1_0.png 2"
-2/texture = ExtResource( 3 )
+2/texture = ExtResource( 4 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 414, 120, 16, 16 )
@@ -72,7 +72,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "my_wall.png 3"
-3/texture = ExtResource( 4 )
+3/texture = ExtResource( 5 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 16, 16 )
@@ -88,7 +88,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 3/z_index = 0
 4/name = "mushy.png 4"
-4/texture = ExtResource( 5 )
+4/texture = ExtResource( 6 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 0, 16, 16 )
@@ -98,7 +98,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "mushy.png 5"
-5/texture = ExtResource( 5 )
+5/texture = ExtResource( 6 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 16, 0, 16, 16 )
@@ -108,7 +108,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "mushy.png 6"
-6/texture = ExtResource( 5 )
+6/texture = ExtResource( 6 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 32, 0, 16, 16 )
@@ -119,7 +119,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 6/z_index = 0
 
 [node name="TemplateSala" type="Node2D"]
-position = Vector2( 3.52859e-005, 0 )
 script = ExtResource( 1 )
 next_scene = "res://Scenes/Rooms/Sala3.tscn"
 
@@ -131,43 +130,33 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ScreenShake" parent="." instance=ExtResource( 3 )]
+editor/display_folded = true
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 128, 128 )
 tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( -458760, -1073741822, 0, -458759, -1073741823, 0, -458758, -1073741823, 0, -458757, -1073741823, 0, -458756, -1073741823, 0, -458755, -1073741823, 0, -458754, -1073741823, 0, -458753, -1073741823, 0, -524288, -1073741823, 0, -524287, -1073741823, 0, -524286, -1073741823, 0, -524285, -1073741823, 0, -524284, -1073741823, 0, -524283, -1073741823, 0, -524282, -1073741823, 0, -524281, 2, 0, -393224, 1610612737, 0, -458745, 1, 0, -327688, 1610612737, 0, -393209, 1, 0, -262152, 1610612737, 0, -327673, 1, 0, -196616, 1610612737, 0, -262137, 1, 0, -131080, 1610612737, 0, -196602, -1073741819, 0, -196601, 1, 0, -65544, 1610612737, 0, -131066, -1073741820, 0, -131065, 1, 0, -8, -1073741824, 0, -65530, -1073741820, 0, -65529, 1, 0, 6, -1073741818, 0, 7, 1, 0, 65543, 1, 0, 131079, 1, 0, 262136, 1610612739, 0, 196615, 0, 0, 524280, -1610612735, 0, 524281, -1610612735, 0, 524282, -1610612735, 0, 524283, -1610612735, 0, 524284, -1610612735, 0, 524285, -1610612735, 0, 524286, -1610612735, 0, 524287, 1610612736, 0, 458755, -1610612736, 0, 458756, -1610612735, 0, 458757, -1610612735, 0, 458758, -1610612735, 0, 458759, -1610612735, 0 )
+tile_data = PoolIntArray( -458760, -1073741822, 0, -458759, -1073741823, 0, -458758, -1073741823, 0, -458757, -1073741823, 0, -458756, -1073741823, 0, -458755, -1073741823, 0, -458754, -1073741823, 0, -458753, -1073741823, 0, -524288, -1073741823, 0, -524287, -1073741823, 0, -524286, -1073741823, 0, -524285, -1073741823, 0, -524284, -1073741823, 0, -524283, -1073741823, 0, -524282, -1073741823, 0, -524281, 2, 0, -393224, 1610612737, 0, -458745, 1, 0, -327688, 1610612737, 0, -393209, 1, 0, -262152, 1610612737, 0, -327673, 1, 0, -196616, 1610612737, 0, -262137, 1, 0, -131080, 1610612737, 0, -196601, 1, 0, -65544, 1610612737, 0, -131065, 1, 0, -8, 1610612737, 0, -65529, 1, 0, 65528, 1610612737, 0, 7, 1, 0, 131064, 1610612737, 0, 65543, 1, 0, 196600, 1610612737, 0, 131079, 1, 0, 262136, -1073741824, 0, 196615, 0, 0, 327671, 1, 0, 393207, 1, 0, 458743, 1, 0, 458750, 6, 0, 458751, 4, 0, 393216, 4, 0, 393217, 5, 0, 524280, -1610612735, 0, 524281, -1610612735, 0, 524282, -1610612735, 0, 524283, -1610612735, 0, 524284, -1610612735, 0, 524285, -1610612735, 0, 524286, -1610612735, 0, 524287, -1610612735, 0, 458752, -1610612735, 0, 458753, -1610612735, 0, 458754, -1610612735, 0, 458755, -1610612735, 0, 458756, -1610612735, 0, 458757, -1610612735, 0, 458758, -1610612735, 0, 458759, -1610612735, 0 )
 
-[node name="Hazard" parent="TileMap" instance=ExtResource( 6 )]
+[node name="Hazard2" parent="TileMap" instance=ExtResource( 7 )]
 editor/display_folded = true
-
-[node name="Portals" parent="TileMap" instance=ExtResource( 7 )]
-editor/display_folded = true
-position = Vector2( 224, -48 )
-
-[node name="Portal1" parent="TileMap/Portals" index="0"]
-position = Vector2( -344, 72 )
+position = Vector2( 0, 112 )
 rotation = 1.57079
 
-[node name="Portal2" parent="TileMap/Portals" index="1"]
-position = Vector2( -200, 168 )
-
-[node name="Gates" type="Node2D" parent="TileMap"]
-editor/display_folded = true
-
-[node name="Gate" parent="TileMap/Gates" instance=ExtResource( 8 )]
+[node name="Gate" parent="TileMap" instance=ExtResource( 8 )]
 position = Vector2( 120, 88 )
 
-[node name="Gate2" parent="TileMap/Gates" instance=ExtResource( 8 )]
-position = Vector2( -120, 88 )
-rotation = 3.14159
-
 [node name="Player" parent="." instance=ExtResource( 9 )]
-[connection signal="body_entered" from="TileMap/Hazard/Area2D" to="." method="_on_Area2D_body_entered"]
+editor/display_folded = true
+position = Vector2( 16, 232 )
+[connection signal="body_entered" from="TileMap/Hazard2/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="TileMap/Gate" to="." method="_on_Gate_body_entered"]
 [connection signal="animation_finished" from="Player/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
-[editable path="TileMap/Hazard"]
+[editable path="ScreenShake"]
 
-[editable path="TileMap/Portals"]
+[editable path="TileMap/Hazard2"]
 
 [editable path="Player"]

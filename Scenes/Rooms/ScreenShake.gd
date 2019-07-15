@@ -7,9 +7,9 @@ onready var camera : Camera2D = $Camera2D
 
 export var shake_strength : int = 3
 # Called when the node enters the scene tree for the first time.
-var stop_shake = false
+var stop_shake = true
 func _ready():
-
+	$Particles2D.emitting = false
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -2,16 +2,14 @@ extends Node2D
 
 onready var tilemap : TileMap = $TileMap
 onready var player : KinematicBody2D = $Player
-onready var gate : Area2D = $TileMap/Gate
-onready var gates : Node = $TileMap/Gates
+onready var gate : = $TileMap/Gate
 onready var player_animator : AnimationPlayer = $Player/AnimationPlayer
 onready var player_sprite : = $Player/Sprite
+onready var screen_shake : = $ScreenShake
+onready var shake_audio_player : = $ScreenShake/AudioStreamPlayer
+onready var shake_particles : = $ScreenShake/Particles2D
+
 ## ADJACENT ROOMS ##
-export var room_on_the_left = "scene_uninitialized"
-export var room_on_the_right = "scene_uninitialized"
-export var room_above = "scene_uninitialized"
-export var room_below = "scene_uninitialized"
-export var room_index : int
 export var next_scene : = ""
 
 var balance = 0
@@ -35,7 +33,7 @@ var state : = idle
 # Called when the node enters the scene tree for the first time.
 func _ready():	## CHECK FOR PORTALS ##
 	## new ver ##
-	
+	gate.locked.disabled = true
 	
 	for child in tilemap.get_children():
 		if child.name == "Portals":
@@ -70,6 +68,7 @@ func _process(delta):
 		die: 
 			_apply_movement(0, delta)
 			_apply_gravity(delta)
+			gate.locked.disabled = false
 			if player_animator.current_animation != "die":
 				player_animator.play("die")
 				
@@ -126,9 +125,11 @@ func _process(delta):
 	if state != die:
 		if Input.is_action_just_pressed("q"): # and rotation_active:
 			room_target -= 90
+			_screen_shake()
 	
 		elif Input.is_action_just_pressed("e"): # and is_current_room and rotation_active:
 			room_target += 90
+			_screen_shake()
 
 	tilemap.rotation_degrees = lerp(tilemap.rotation_degrees, room_target, PlayerVariables.ROOM_ACCEL*delta)
 	
@@ -142,35 +143,6 @@ func _process(delta):
 	
 	## GATE STATE LOGIC##
 	
-	if last_gate_direction != gate_direction:
-		for gate in gates.get_children():
-			gate.locked.disabled = true
-#			match gate_direction:
-#				Vector2.DOWN:
-#					if ResourceLoader.exists(room_below):
-#						gate.locked.disabled = true
-#					else: 
-#						gate.locked.disabled = false
-#				Vector2.UP:
-#					if ResourceLoader.exists(room_above):
-#						gate.locked.disabled = true
-#					else: 
-#						gate.locked.disabled = false
-#				Vector2.LEFT:
-#					if ResourceLoader.exists(room_on_the_left):
-#						gate.locked.disabled = true
-#					else: 
-#						gate.locked.disabled = false
-#				Vector2.RIGHT:
-#					if ResourceLoader.exists(room_on_the_right):
-#						gate.locked.disabled = true
-#					else: 
-#						gate.locked.disabled = false
-
-#func _animation_handler() -> void:
-#	match player_animator.current_animation:
-#		_: 
-#			pass
 
 func _directional_input() -> int:
 	if !(Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left")):
@@ -195,40 +167,9 @@ func _directional_input() -> int:
 
 
 func _on_Gate_body_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" and state!= die:
 		get_tree().change_scene(next_scene)
-#		PlayerVariables.movement = movement
-#		match gate_direction:
-#			Vector2.DOWN:
-#				if ResourceLoader.exists(room_below):
-##					PlayerVariables.ComingFrom = PlayerVariables.UP
-#					get_tree().change_scene(room_below)
-#					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y + 256)
-#				else:
-#					print("Scene ", room_below ," doesnt exist")
-#			Vector2.RIGHT:
-#				if ResourceLoader.exists(room_on_the_right):
-##					PlayerVariables.ComingFrom = PlayerVariables.LEFT
-#					PlayerVariables.new_player_position = Vector2(player.global_position.x - 256, player.global_position.y)
-#					get_tree().change_scene(room_on_the_right)
-#				else:
-#					print("Scene ", room_on_the_right ," doesnt exist")
-#			Vector2.UP:
-#				if ResourceLoader.exists(room_above):
-##					PlayerVariables.ComingFrom = PlayerVariables.DOWN
-#					PlayerVariables.new_player_position = Vector2(player.global_position.x, player.global_position.y - 256)
-#					get_tree().change_scene(room_above)
-#				else:
-#					print("Scene ", room_above ," doesnt exist")
-#			Vector2.LEFT:
-#				if ResourceLoader.exists(room_on_the_left): 
-##					PlayerVariables.ComingFrom = PlayerVariables.RIGHT
-#					PlayerVariables.new_player_position = Vector2(player.global_position.x + 256, player.global_position.y)
-#					get_tree().change_scene(room_on_the_left)
-#				else:
-#					print("Scene ", room_on_the_left ," doesnt exist")
-#			_:
-#				print("Gate direction invalid")
+
 
 func _apply_movement(input, delta):
 	var temp_movement = movement
@@ -252,7 +193,8 @@ func _apply_gravity(delta):
 
 func _on_Area2D_body_entered(body):
 	if body.name == "Player":
-		is_dying = true
+		state = die
+		
 	pass # Replace with function body.
 
 
@@ -263,6 +205,12 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_Gate2_body_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" and (state != die):
+		print(state)
 		get_tree().change_scene(next_scene)
 	pass # Replace with function body.
+	
+func _screen_shake():
+	screen_shake.stop_shake = false
+	shake_audio_player.play(0)
+	shake_particles.emitting = true

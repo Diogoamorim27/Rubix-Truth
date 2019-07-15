@@ -3,11 +3,12 @@ extends Node2D
 onready var tilemap : TileMap = $TileMap
 onready var player : KinematicBody2D = $Player
 onready var gate : Area2D = $TileMap/Gate
-onready var gates : Node = $TileMap/Gates
 onready var player_animator : AnimationPlayer = $Player/AnimationPlayer
 onready var player_sprite : = $Player/Sprite
 onready var screen_shake : = $ScreenShake
-onready var schake_audio_player : = $ScreenShake/AudioStreamPlayer
+onready var shake_audio_player : = $ScreenShake/AudioStreamPlayer
+onready var shake_particles : = $ScreenShake/Particles2D
+
 ## ADJACENT ROOMS ##
 export var room_on_the_left = "scene_uninitialized"
 export var room_on_the_right = "scene_uninitialized"
@@ -39,6 +40,9 @@ var state : = idle
 func _ready():
 	## chekcing if singleton works
 	## CHECK FOR PORTALS ##
+	_screen_shake()
+	
+	gate.locked.disabled = true
 	
 	for child in tilemap.get_children():
 		if child.name == "Portals":
@@ -127,29 +131,6 @@ func _process(delta):
 	
 	## GATE STATE LOGIC##
 	
-	if last_gate_direction != gate_direction:
-		for gate in gates.get_children():
-			match gate_direction:
-				Vector2.DOWN:
-					if ResourceLoader.exists(room_below):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
-				Vector2.UP:
-					if ResourceLoader.exists(room_above):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
-				Vector2.LEFT:
-					if ResourceLoader.exists(room_on_the_left):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
-				Vector2.RIGHT:
-					if ResourceLoader.exists(room_on_the_right):
-						gate.locked.disabled = true
-					else: 
-						gate.locked.disabled = false
 
 #func _animation_handler() -> void:
 #	match player_animator.current_animation:
@@ -194,4 +175,7 @@ func _on_AudioStreamPlayer_finished():
 
 func _screen_shake():
 	screen_shake.stop_shake = false
-	screen_shake.$AudioStreamPlayer.play(0)
+	shake_audio_player.play(0)
+	shake_particles.emitting = true
+
+	
