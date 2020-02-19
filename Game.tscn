@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Assets/black.png" type="Texture" id=2]
@@ -10,6 +10,16 @@
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -33,12 +43,15 @@ scale = Vector2( 4.5, 4.5 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 144.0
-margin_top = 240.0
-margin_right = 250.0
-margin_bottom = 256.0
+margin_left = 24.6329
+margin_top = 237.22
+margin_right = 294.633
+margin_bottom = 253.22
 theme = SubResource( 1 )
-text = "W, A, S, D, Q, E"
+text = "W, A, S, D, Q, E, ESPACO"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureButton" type="TextureButton" parent="."]
 margin_left = 80.0
@@ -47,6 +60,9 @@ margin_right = 184.0
 margin_bottom = 200.0
 texture_normal = ExtResource( 5 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 128, 128 )
@@ -60,4 +76,22 @@ position = Vector2( 128, 0 )
 emitting = false
 one_shot = true
 process_material = ExtResource( 7 )
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 167.0
+margin_top = 6.0
+margin_right = 248.0
+margin_bottom = 28.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 2 )
+text = "PT-BR"
+items = [ "PT-BR", null, false, 0, null, "EN-US", null, false, 1, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]

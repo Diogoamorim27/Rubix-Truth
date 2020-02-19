@@ -18,7 +18,7 @@ var room_target = 0
 var gate_direction = Vector2()
 var room_rotation
 var has_portals : bool 
-var portals : Area2D
+var portals 
 var last_gate_direction = Vector2()
 
 var is_dying : = false

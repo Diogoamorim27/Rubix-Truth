@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 PlayerVariables="*res://Scenes/Player/PlayerVariables.gd"
 Soundtrack="*res://Soundtrack.tscn"
+Lang="*res://Translation.tscn"
 
 [display]
 
@@ -31,7 +32,7 @@ window/size/height=256
 window/size/test_width=600
 window/size/test_height=600
 window/stretch/mode="2d"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [gui]
 

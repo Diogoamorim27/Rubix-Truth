@@ -27,3 +27,12 @@ func _process(delta):
 func _on_TextureButton_pressed():
 	get_tree().change_scene("res://Scenes/Rooms/Intro.tscn")
 	pass # Replace with function body.
+
+
+func _on_OptionButton_item_selected(id):
+	Lang.Language = id
+	if id == 0:
+		$Label.text = "W, A, S, D, Q, E, ESPACO"
+	elif id == 1:
+		$Label.text = "W, A, S, D, Q, E, SPACE BAR"
+	pass # Replace with function body.

@@ -20,8 +20,8 @@ texture = ExtResource( 2 )
 [node name="Label" type="Label" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 310.0
-margin_bottom = 24.0
+margin_right = 255.0
+margin_bottom = 195.0
 theme = SubResource( 1 )
 text = "E dentro do bau havia um 
 pergaminho. E no pergaminho 
@@ -33,3 +33,7 @@ Ir bem na faculdade nãao e so
 o que importa. So uma bruxa 
 poderosa saberia chegar ate
 aqui!\""
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -11,6 +11,9 @@ default_font = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="black" type="Sprite" parent="."]
 position = Vector2( 128, 128 )
@@ -33,3 +36,7 @@ cavernas sãao magicas e
 escondem perigos, mas 
 sabe tambem que sacrificios 
 precisam ser feitos."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
